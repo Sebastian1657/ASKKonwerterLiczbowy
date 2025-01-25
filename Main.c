@@ -31,6 +31,7 @@ void KonwersjaBinINT(){
         for(int i=31;i>=0;i--)printf("%c",bin[i]);
     }
     printf(" (BIN)\n");
+    getchar();
 }
 void KonwersjaBinFLOAT(){
     float liczba;
@@ -55,6 +56,7 @@ void KonwersjaBinFLOAT(){
         printf("%d",(mantysa>>i)&1);
     }
     printf(" (BIN IEEE 754)\n");
+    getchar();
 }
 void KonwersjaBinDOUBLE(){
     double liczba;
@@ -79,6 +81,7 @@ void KonwersjaBinDOUBLE(){
         printf("%d",(int)(mantysa>>i)&1);
     }
     printf(" (BIN IEEE 754)\n");
+    getchar();
 }
 void KonwersjaBajtINT(){
     int liczba=1, k, endian=1; //1-big endian, 0-little endian
@@ -102,6 +105,7 @@ void KonwersjaBajtINT(){
         }
     }
     printf(" (HEX)\n");
+    getchar();
 }
 void KonwersjaBajtFLOAT(){
     int e=1, k, endian=1; //1-big endian, 0-little endian
@@ -126,6 +130,7 @@ void KonwersjaBajtFLOAT(){
         }
     }
     printf(" (HEX)\n");
+    getchar();
 }
 void KonwersjaBajtDOUBLE(){
     int e=1, k, endian=1; //1-big endian, 0-little endian
@@ -150,6 +155,7 @@ void KonwersjaBajtDOUBLE(){
         }
     }
     printf(" (HEX)\n");
+    getchar();
 }
 void MenuPostac(short typ){
     char ch;
@@ -289,7 +295,56 @@ void FloatDec(){
     }while(ch!=27);
 };
 void OdejmowanieU2(){
-    printf("Odejmowanie w U2\n");
+    char ch;
+    printf("+================================================================================================================+\n");
+    printf("|   Odejmowanie w systemie U2 (z uzupelnieniem do 2) wyroznia sie tym, ze pozwala na zastapienie odejmowania,    |\n");
+    printf("|   dodawaniem liczby ujemnej. Nastepuje to poprzez negacje liczby ujemnej, dodanie do niej 1 bitu oraz dodanie  |\n");
+    printf("|   jej do drugiej liczby. Przy takiej operacji moze wystapic przepelnienie. Jesli obie liczby maja rozny znak   |\n");
+    printf("|   nalezy po prostu usunac nadmiarowy bit. Ilosc bitow, na ktorych operuje sie w systemie u2 jest zalezna od    |\n");
+    printf("|   zakresu liczb, wedlug wzoru -2^n-1 do 2^n-1 - 1, gdzie n oznacza ilosc wykorzystywanych bitow.               |\n");
+    printf("+========================================================+=======================================================+\n");
+    printf("|                                           Przyklad dla 5-3 = 5+(-3):                                           |\n");
+    printf("|   Przewidujemy, ze wwynik bedzie mniejszy niz ktorakolwiek z liczb, a bezwzglednie najwieksza liczba jest 5,   |\n");
+    printf("|   wiec 4 bity do obliczen nam wystarcza (bo (2^(4-1))-1 = 7 > 5).                                              |\n");
+    printf("|   5(dec) = 0101b                                                                                               |\n");
+    printf("|   3(dec) = 0011b                                                                                               |\n");
+    printf("|   Aby uzyskac wartosc ujemna liczby binarnej nalezy zanegowac wszystkie jej bity, a nastepnie dodac 1:         |\n");
+    printf("|       > 0011 => 1100                                                                                           |\n");
+    printf("|       > 1100 + 0001 = 1101 = -3(dec)                                                                           |\n");
+    printf("|   Uzyskujemy rownanie:                                     +=======================+                           |\n");
+    printf("|       > 0101 + 1101                                        |   Schemat dodawania   |                           |\n");
+    printf("|   Dodajemy do siebie obie liczby:                          +-----------------------+                           |\n");
+    printf("|       :   0101                                             | 0 + 0 = 0             |                           |\n");
+    printf("|       :  +1101                                             | 0 + 1 = 1             |                           |\n");
+    printf("|       :  -----                                             | 1 + 0 = 1             |                           |\n");
+    printf("|       :  10010                                             | 1 + 1 = 0 + 1 w lewo  |                           |\n");
+    printf("|       :  ^ bit z przepelnienia nalezy usunac               +=======================+                           |\n");
+    printf("|       > 0101 + 1101 = 0010 (5+(-3)=2)                                                                          |\n");
+    printf("|                                                                                                                |\n");
+    printf("+--------------------------------------------------------+-------------------------------------------------------+\n");
+    printf("|                                                        |                   -2-7 = (-2)+(-7)                    |\n");
+    printf("|                      7-6 = 7+(-6)                      |   Tutaj pryewidujemy, ze wynik bedzie mniejszy niz    |\n");
+    printf("|                0111-0110 = 0111+1010                   |   najmniejsza z liczb, wiec musimy uzyc dodatkowego   |\n");
+    printf("|                         0111                           |   bitu przy obliczeniach (bo -2^(5-1)<(-2)+(-7))      |\n");
+    printf("|                        +1010                           |           -00010-00111 = 11110+11001                  |\n");
+    printf("|                        -----                           |                       11110                           |\n");
+    printf("|                        10001                           |                      +11001                           |\n");
+    printf("|                        x                               |                      ------                           |\n");
+    printf("|                    0111-0110=0001                      |                      110111                           |\n");
+    printf("|                                                        |                      x                                |\n");
+    printf("|                                                        |                11110+11001=110111                     |\n");
+    printf("+========================================================+=======================================================+\n");
+    printf("|                                  Nacisnij ESC aby powrocic do menu glownego.                                   |\n");
+    printf("+================================================================================================================+\n");
+    do{
+        ch = getch();
+    } while (ch != 27);
+    switch(ch){
+        case 27:
+            system("cls");
+            menu();
+            break;
+    }
 };
 
 void menu(void){
