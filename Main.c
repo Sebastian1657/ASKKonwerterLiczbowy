@@ -279,13 +279,9 @@ void FloatDec(){
         switch(ch){
             case 32:
                 system("cls");
-                if(i){
-                    p2();
-                    i=0;
-                }else{
-                    p1();
-                    i=1;
+                if(i){p2();i=0;
                 }
+                else{p1();i=1;}
                 break;
             case 27:
                 system("cls");
@@ -323,7 +319,7 @@ void OdejmowanieU2(){
     printf("|                                                                                                                |\n");
     printf("+--------------------------------------------------------+-------------------------------------------------------+\n");
     printf("|                                                        |                   -2-7 = (-2)+(-7)                    |\n");
-    printf("|                      7-6 = 7+(-6)                      |   Tutaj pryewidujemy, ze wynik bedzie mniejszy niz    |\n");
+    printf("|                      7-6 = 7+(-6)                      |   Tutaj przewidujemy, ze wynik bedzie mniejszy niz    |\n");
     printf("|                0111-0110 = 0111+1010                   |   najmniejsza z liczb, wiec musimy uzyc dodatkowego   |\n");
     printf("|                         0111                           |   bitu przy obliczeniach (bo -2^(5-1)<(-2)+(-7))      |\n");
     printf("|                        +1010                           |           -00010-00111 = 11110+11001                  |\n");
